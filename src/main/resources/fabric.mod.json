@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "astreal-client",
+  "version": "${version}",
+  "name": "Astreal Client",
+  "description": "Custom Minecraft client made by Zenit",
+  "authors": [
+    "Zenit"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/astreal-client/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.astreal.client.AstrealClient"
+    ]
+  },
+  "mixins": [
+    "astreal-client.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.21",
+    "minecraft": "~1.21.11",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
+}
