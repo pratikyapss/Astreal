@@ -1,0 +1,38 @@
+name: Build Minecraft Mod
+
+on:
+  push:
+    branches:
+      - main # Or the branch you develop on, e.g., 'develop'
+  pull_request:
+    branches:
+      - main # Or the branch you develop on
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java Development Kit
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # Recommended distribution
+          java-version: '17'     # Common Java version for modern Minecraft mods (e.g., 1.18+)
+                                 # Adjust this if your mod targets an older Minecraft version (e.g., '8' for 1.12.2, '11' for 1.17)
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Upload Mod Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mod-artifacts
+          path: build/libs/*.jar # This path is standard for Gradle projects.
+                                 # It will upload all .jar files found in build/libs.
+                                 # If you have specific output names, you might need to adjust, e.g., build/libs/your-mod-*.jar
